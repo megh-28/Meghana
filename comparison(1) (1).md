@@ -11,11 +11,4 @@
 
 ## Verdict
 
-I would hand the **Copilot-after-fixes version** to a teammate because its validation is centralized, its exception messages are clearer, and its formatting is more consistent. However, I would simplify `AtomicBoolean` back to a normal boolean unless thread safety is an explicit requirement, because it adds behaviour and complexity beyond the specification. The scratch version meets the core requirements well but would benefit from cleaner formatting, a reusable validation helper, and clearer exception messages. Next time, the C-I-E prompt should explicitly say to **follow only the requested specification, avoid unrequested concurrency or normalization behaviour, centralize repeated validation, use `IllegalArgumentException` for invalid inputs and `IllegalStateException` for invalid state transitions, and keep the implementation minimal and consistently formatted**.
-
-## Commit
-
-```bash
-git add lab2/comparison.md
-git commit -m "lab2: comparison"
-```
+I would hand the **Copilot-after-fixes** version to a teammate because the AI-generated implementation, after review and a targeted follow-up prompt, handles important edge cases more effectively, particularly concurrent `checkOut()` and `returnBook()` operations. The initial Copilot version already met most of the core requirements, and the human review helped identify the concurrency weakness that was then improved using `AtomicBoolean` and `compareAndSet()`. This demonstrates that AI-generated code can become stronger when its output is reviewed and refined with specific follow-up prompts rather than accepted blindly. Next time, the C-I-E prompt should explicitly include important edge cases such as concurrency from the beginning, while still requiring correct exception handling, validation, minimal specification drift, and consistent formatting.
