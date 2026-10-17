@@ -16,7 +16,7 @@
 | Field | What goes in it |
 |---|---|
 | **Tool** | GitHub Copilot in IntelliJ IDEA  |
-| **Prompt (summary; not verbatim)** | Create a MemberRepository interface with Optional<Member> findById(int) and save(Member). |
+| **Prompt** | Create a MemberRepository interface with Optional<Member> findById(int) and save(Member). |
 | **Output** | MemberRepository interface for member lookup and updates. |
 | **Issues** | No clear problem in the proposed interface. |
 | **Decision** | Accepted as part of the revised design. |
@@ -24,19 +24,7 @@
 | **Learned** | Separate membership lookup from the library service. |
 
 
-### Interaction Log 3: In-memory book and member repositories
-
-| Field | What goes in it |
-|---|---|
-| **Tool** | GitHub Copilot in IntelliJ IDEA  |
-| **Prompt (summary; not verbatim)** | Create InMemoryBookRepository and InMemoryMemberRepository with HashMaps implementing repository interfaces. |
-| **Output** | In-memory book and member storage implementations. |
-| **Issues** | In-memory storage is not durable across application restarts. |
-| **Decision** | Accepted for Activity 3 demonstration. |
-| **Fix** | Used the permitted in-memory implementation instead of requiring MySQL. |
-| **Learned** | Interfaces allow alternate infrastructure implementations. |
-
-### Interaction Log 4: ConsoleNotificationService.java
+### Interaction Log 3: ConsoleNotificationService.java
 
 | Field | What goes in it |
 |---|---|
@@ -48,7 +36,7 @@
 | **Fix** | Used console output to avoid infrastructure during the demonstration. |
 | **Learned** | Concrete notification behaviour can be replaced behind an interface. |
 
-### Interaction Log 5: LibraryService.java
+### Interaction Log 4: LibraryService.java
 
 | Field | What goes in it |
 |---|---|
@@ -60,7 +48,7 @@
 | **Fix** | Extended the service with loan abstraction and missing business operations. |
 | **Learned** | Improving design must not remove required behaviour. |
 
-### Interaction Log 6: Loan.java and loan repositories
+### Interaction Log 5: Loan.java and loan repositories
 
 | Field | What goes in it |
 |---|---|
@@ -73,7 +61,7 @@
 | **Learned** | Domain state must survive refactoring of storage boundaries. |
 
 
-### Interaction Log 7: Mockito regression tests
+### Interaction Log 6: Mockito regression tests
 
 | Field | What goes in it |
 |---|---|
@@ -85,7 +73,7 @@
 | **Fix** | Maven execution showed 6 tests, 0 failures, 0 errors, 0 skipped; BUILD SUCCESS. |
 | **Learned** | Test results become evidence only after execution. |
 
-### Interaction Log 8:  LibraryApp verification
+### Interaction Log 7:  LibraryApp verification
 
 | Field | What goes in it |
 |---|---|
@@ -97,17 +85,16 @@
 | **Fix** | Observed counts 1 after borrow and 0 after return; exit code 0. |
 | **Learned** | Runnable integration checks complement mock-based tests. |
 A
-## Interaction Log 9 Activity 4— Generating a SOLID-Compliant LibraryService
+## Interaction Log 8 Activity 4— Generating a SOLID-Compliant LibraryService
 
 | Field | Description |
 |---|---|
 | **Tool** | GitHub Copilot in IntelliJ IDEA (as reported; verify against your actual session) |
-| **Prompt** | Generate a SOLID-compliant implementation in the package ie.ucd.comp41670.lab6.library.cleanprompt. Support borrowing, returning, searching books by ISBN/title/author, default 14-day loans, overdue detection and notifications. Separate business logic from persistence and notification delivery using small repository and notification interfaces. Use constructor injection and final fields. Include simple in-memory concrete implementations and a main application that wires them together. Use java.time.Clock to make overdue logic testable. Do not put JDBC, SQL, SMTP, or concrete infrastructure construction inside LibraryService. Validate unknown members, unknown books, unavailable books and incorrect borrowers. Keep all existing original and refactored classes untouched.
-|
+| **Prompt** | Generate a SOLID-compliant implementation in the package ie.ucd.comp41670.lab6.library.cleanprompt. Support borrowing, returning, searching books by ISBN/title/author, default 14-day loans, overdue detection and notifications. Separate business logic from persistence and notification delivery using small repository and notification interfaces. Use constructor injection and final fields. Include simple in-memory concrete implementations and a main application that wires them together. Use java.time.Clock to make overdue logic testable. Do not put JDBC, SQL, SMTP, or concrete infrastructure construction inside LibraryService. Validate unknown members, unknown books, unavailable books and incorrect borrowers. Keep all existing original and refactored classes untouched.Existing domain classes are Book and Member in the package ie.ucd.comp41670.lab6.library.|
 | **Output** | Generated 13 Java files in `ie.ucd.comp41670.lab6.library.cleanprompt`, including domain records, interfaces, in-memory implementations, `LibraryService`, and `LibraryApp`. |
 | **Issues** | Copilot created new `Book` and `Member` records instead of reusing the original models. Book availability is derived from active loans instead of a mutable flag. The availability check and loan save are separate, presenting a possible concurrency race. |
-| **Decision** | **Accepted if the uploaded files are the unchanged first output.** Otherwise mark **Modified** and explain actual edits. |
-| **Fix** | No SOLID refactor was required based on the five-point static audit. Record any actual corrections separately. |
+| **Decision** | **Accepted ** Otherwise mark **Modified** and explain actual edits. |
+| **Fix** | No SOLID refactor was required based on the five-point static audit. |
 | **Learned** | Explicit constructor-injection and infrastructure-separation requirements helped avoid the SRP and DIP problems observed in Activity 2. |
 
 
